@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "TBL表单自动完成",
+    "version": "1.0",
+    "description": "自动补充TBL网站各种表单数据，方便测试",
+    "icons": {
+        "38": "images/icon38.png"
+    },
+    "permissions": [
+        "https://qa-www.twobrightlights.com/*", 
+        "tabs"
+     ],
+    "browser_action": {
+        "default_icon": {
+            "38": "images/icon38.png"
+        },
+        "default_title": "TBL表单自动完成",
+        "default_popup": "popup.html"
+    }
+}
