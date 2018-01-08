@@ -1,30 +1,10 @@
+//发送消息  获取当前活动的页面的url，发送消息到back后台
+// chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+//     chrome.runtime.sendMessage(tabs[0].url,function(response){
+//         console.log(response,2222);
+//     });
+// })
 
-chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-    let url = new URL(tabs[0].url);
-    switch(url.host){
-        case 'qa-www.twobrightlights.com':
-            qa(url);
-            break;
-        case 'tbl.local.com':
-            local(url);
-            break;
-        case 'www.twobrightlights.com':
-            prod(url);
-            break;
-        default:break;
-    }
-})
+// test();
 
-function qa(url){
-    chrome.tabs.executeScript(null,{file:"./js/common.js"});
-}
-
-
-
-function local(url){
-
-}
-
-function prod(url){
-
-}
+chrome.tabs.executeScript(null,{file:"./js/common.js"});
