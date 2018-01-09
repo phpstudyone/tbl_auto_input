@@ -14,6 +14,23 @@ if(url.host == 'qa-www.twobrightlights.com'){
 }else if(url.host == 'local.tbl.com'){
     superPassword = '123456789'; 
 }
+//当打开顶部登录框的时候,自动填充(需先绑定事件)
+// topLoginForm = document.getElementsByClassName('dropdown-toggle blueHighlight');
+// if(topLoginForm.length == 1){
+//     topLoginForm[0].addEventListener('click',function(){
+//       let frmLoginTop = document.forms.frmLoginTop;
+//       frmLoginTop.UserEmail.value = 'gzp2@twobrightlights.com';
+//       frmLoginTop.UserPassword.value = superPassword; 
+//     }) 
+// }
+
+//当顶部登录窗口处于打开状态,点击扩展图标自动填充
+topLoginForm = document.getElementsByClassName('dropdown blueHighlight  test-loginformbtn'); 
+if(topLoginForm.length == 1 && topLoginForm[0].classList.contains('open')){
+    let frmLoginTop = document.forms.frmLoginTop;
+    frmLoginTop.UserEmail.value = 'gzp2@twobrightlights.com';
+    frmLoginTop.UserPassword.value = superPassword; 
+}
 
 pageFunction = {
     '/signup/index' : ()=>{
@@ -34,7 +51,9 @@ preg = /\/administrator.*/;
 if(preg.test(url.pathname)){
     pageFunction['administrator']();
 }else{
-    pageFunction[url.pathname]();
+    if(typeof pageFunction[url.pathname] != undefined){
+      pageFunction[url.pathname]();
+    }
 }
     
 
