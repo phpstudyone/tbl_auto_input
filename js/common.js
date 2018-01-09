@@ -11,7 +11,7 @@ adminInfo = {
 
 if(url.host == 'qa-www.twobrightlights.com'){
     superPassword = 'aT2thg_Git8'; 
-}else if(url.host == 'tbl.local.com'){
+}else if(url.host == 'local.tbl.com'){
     superPassword = '123456789'; 
 }
 
