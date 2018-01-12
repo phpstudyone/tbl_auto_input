@@ -9,6 +9,7 @@
     "permissions": [
         "*://qa-www.twobrightlights.com/*", 
         "*://local.tbl.com/*",
+        "https://test.authorize.net/*",
         "tabs",
         "history",
         "contextMenus"
@@ -27,8 +28,14 @@
     },
     "content_scripts": [
         {
-            "matches": ["*://*/*"],
-            "js": ["js/content.js"]
+            "matches": ["*://qa-www.twobrightlights.com/*","*://local.tbl.com/*"],
+            "run_at": "document_start",
+            "js": ["js/content.js","js/common.js"]
+        },{
+            "matches": ["https://test.authorize.net/*"],
+            "run_at": "document_end",
+            "js": ["js/authorize_net.js"],
+            "all_frames": true
         }
     ]
 }

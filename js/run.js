@@ -7,4 +7,5 @@
 
 // test();
 
-chrome.tabs.executeScript(null,{file:"./js/common.js"});
+// chrome.tabs.executeScript(null,{file:"./js/common.js"});
+chrome.tabs.executeScript(null,{code:"run();"});
