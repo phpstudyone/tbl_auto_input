@@ -72,7 +72,7 @@ let pageFunction = {
             document.getElementsByClassName('btn-blue albSaveFinal tagSaveBtn new_dom test-nextdone')[0].click();
         }, sleep*i++);
     }
-}
+};
 
 console.log(url.host);
 
