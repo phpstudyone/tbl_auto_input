@@ -1,1 +1,1 @@
-chrome.tabs.executeScript(null,{code:"run();"});
+//chrome.tabs.executeScript(null,{code:"run();"});
