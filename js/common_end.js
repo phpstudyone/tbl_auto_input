@@ -4,37 +4,74 @@
 (()=>{
     let url = new URL(window.location.href);
 
+    let _sameFieldINput = (UserProfileFirstName)=>{
+        let signUpForm = document.forms.signUpForm;
+        signUpForm.UserProfileFirstName.value = UserProfileFirstName;
+        signUpForm.UserProfileLastName.value = commom.getRandomMathByTime();
+        signUpForm.UserEmail.value = signUpForm.UserProfileFirstName.value + signUpForm.UserProfileLastName.value + '@twobrightlights.com';
+        signUpForm.UserPassword.value = '123456789';
+        let UserAddressStateId = signUpForm.UserAddressStateId;
+        UserAddressStateId.value = 5;
+        document.getElementById('UserAddressStateIdSelectBoxItText').innerHTML = UserAddressStateId.options[UserAddressStateId.selectedIndex].text;
+        if( document.getElementById('hdn_sub_state_id') ){
+            document.getElementById('hdn_sub_state_id').value = 5;
+        }
+        signUpForm.UserAddressCity.value = 'New York';
+        signUpForm.UserAddressZipcode.value = '78234678';
+        signUpForm.UserAddressPhoneNumber.value = '2341234646';
+        signUpForm.UserProfileOrganizationName.value = signUpForm.UserProfileFirstName.value + signUpForm.UserProfileLastName.value;
+        let UserProfileEstablishedWhen = signUpForm.UserProfileEstablishedWhen;
+        UserProfileEstablishedWhen.value = 2018;
+        document.getElementById('UserProfileEstablishedWhenSelectBoxItText').innerHTML = UserProfileEstablishedWhen.options[UserProfileEstablishedWhen.selectedIndex].text;
+        signUpForm.UserProfileWebAddress.value = 'www.' +　signUpForm.UserProfileOrganizationName.value + '.com';
+        document.getElementById('chk_condition').click();
+    };
+
     let clickFunction = {
         'A' : ()=>{
-            let signUpForm = document.forms.signUpForm;
-            signUpForm.UserProfileFirstName.value = 'gzp_';
-            signUpForm.UserProfileLastName.value = commom.getRandomMathByTime();
-            signUpForm.UserEmail.value = signUpForm.UserProfileFirstName.value + signUpForm.UserProfileLastName.value + '@twobrightlights.com';
-            signUpForm.UserPassword.value = '123456789';
-            let UserAddressStateId = signUpForm.UserAddressStateId;
-            UserAddressStateId.value = 5;
-            document.getElementById('UserAddressStateIdSelectBoxItText').innerHTML = UserAddressStateId.options[UserAddressStateId.selectedIndex].text;
-            if( document.getElementById('hdn_sub_state_id') ){
-                document.getElementById('hdn_sub_state_id').value = 5;
-            }
-            signUpForm.UserAddressCity.value = 'New York';
-            signUpForm.UserAddressZipcode.value = '78234678';
-            signUpForm.UserAddressPhoneNumber.value = '2341234646';
-            signUpForm.UserProfileOrganizationName.value = signUpForm.UserProfileFirstName.value + signUpForm.UserProfileLastName.value;
-            let UserProfileEstablishedWhen = signUpForm.UserProfileEstablishedWhen;
-            UserProfileEstablishedWhen.value = 2018;
-            document.getElementById('UserProfileEstablishedWhenSelectBoxItText').innerHTML = UserProfileEstablishedWhen.options[UserProfileEstablishedWhen.selectedIndex].text;
-            signUpForm.UserProfileWebAddress.value = 'www.' +　signUpForm.UserProfileOrganizationName.value + '.com';
-            document.getElementById('chk_condition').click();
+            _sameFieldINput('gzp_');
         },
         'B' : ()=>{
-
+            _sameFieldINput('gzv_');
+            let VendorServiceVendorCategoryId = document.forms.signUpForm.VendorServiceVendorCategoryId;
+            VendorServiceVendorCategoryId.value = 95;
+            document.getElementById('VendorServiceVendorCategoryIdSelectBoxItText').innerHTML = VendorServiceVendorCategoryId.options[VendorServiceVendorCategoryId.selectedIndex].text;
         },
         'C' : ()=>{
-
+            _sameFieldINput('gzvp_');
         },
         'D' : ()=>{
+            let frmEditor = document.forms.frmEditor;
+            frmEditor.UserProfileFirstNameE.value = 'gze_';
+            frmEditor.UserProfileLastNameE.value = commom.getRandomMathByTime();
+            frmEditor.UserEmailE1.value = frmEditor.UserProfileFirstNameE.value + frmEditor.UserProfileLastNameE.value + '@twobrightlights.com';
+            let UserAddressStateIdE = frmEditor.UserAddressStateIdE;
+            UserAddressStateIdE.value = 5;
+            document.getElementById('UserAddressStateIdESelectBoxItText').innerHTML = UserAddressStateIdE.options[UserAddressStateIdE.selectedIndex].text;
+            ((stateValue)=>{
+                let actionRole = document.getElementById('otherstate_sub_editor');
+                if(actionRole){
+                    stateValue ? (actionRole.style.display = 'inline') : (actionRole.style.display = 'none');
+                }
+                if (document.getElementById('hdn_sub_state_id_e')) {
+                    document.getElementById('hdn_sub_state_id_e').value = stateValue;
+                }
+            })(5);
 
+            frmEditor.UserAddressCityE.value = 'New York';
+            frmEditor.UserAddressZipcodeE.value = '2347889';
+            frmEditor.UserAddressPhoneNumberE.value = '897347';
+            frmEditor.UserProfileOrganizationNameE.value = frmEditor.UserProfileFirstNameE.value + frmEditor.UserProfileLastNameE.value;
+            let UserProfileEstablishedWhenE = frmEditor.UserProfileEstablishedWhenE;
+            UserProfileEstablishedWhenE.value = 2018;
+            document.getElementById('UserProfileEstablishedWhenESelectBoxItText').innerHTML = UserProfileEstablishedWhenE.options[UserProfileEstablishedWhenE.selectedIndex].text;
+            frmEditor.UserProfileWebAddressE.value = 'www.' +　frmEditor.UserProfileOrganizationNameE.value + '.com';
+            frmEditor.publication_name_1.value = 'publication_' + frmEditor.UserProfileLastNameE.value;
+            let PublicationType1 = frmEditor.PublicationType1;
+            PublicationType1.value = 'P';
+            document.getElementById('PublicationType1SelectBoxItText').innerHTML = PublicationType1.options[PublicationType1.selectedIndex].text;
+            frmEditor.circulation_1.value = 100;
+            document.getElementById('chk_condition_editor').click();
         },
         'E' : ()=>{
             document.getElementsByClassName('albumTypeSelect')[0].click();
