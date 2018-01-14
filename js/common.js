@@ -2,6 +2,7 @@
  * 页面加载完毕之前注入的js文件
  * （供后台脚本调用）
  */
+let url = new URL(window.location.href);
 
 let commom = {
     'getAfterNdate' : (n)=>{
@@ -15,19 +16,7 @@ let commom = {
     }
 };
 
-let url = new URL(window.location.href);
-
-
 let pageFunction = {
-    '/signup/index' : ()=>{
-        console.log(11111);
-    },
-    '/users/user_login' : ()=>{
-        let loginForm = document.forms.frmLogin
-        loginForm.UserEmail.value = 'gzp2@twobrightlights.com';
-        loginForm.UserPassword.value = superPassword;
-    },
-
     '/albums/create_album':()=>{
         document.getElementsByClassName('albumTypeSelect')[0].click();
         let i = 1 , sleep = 1000;
@@ -62,26 +51,9 @@ let pageFunction = {
     }
 };
 
-console.log(url.host);
-
-if(document.getElementById('cardNum')){
-    document.getElementById('cardNum').value = '3333333';
-}
-
 function run(){
-    console.log(url.host);
-
-    if(document.getElementById('cardNum')){
-        document.getElementById('cardNum').value = '22222222';
-    }
-
-    let preg = /\/administrator.*/;
-    if(preg.test(url.pathname)){
-        pageFunction['administrator']();
-    }else{
-        if(typeof pageFunction[url.pathname] !== undefined){
-            pageFunction[url.pathname]();
-        }
+    if(typeof pageFunction[url.pathname] !== undefined){
+        pageFunction[url.pathname]();
     }
 }
 
