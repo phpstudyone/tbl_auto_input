@@ -31,6 +31,11 @@
             "matches": ["*://qa-www.twobrightlights.com/*","*://local.tbl.com/*"],
             "run_at": "document_start",
             "js": ["js/content.js","js/common.js"]
+        },
+        {
+            "matches": ["*://qa-www.twobrightlights.com/*","*://local.tbl.com/*"],
+            "run_at": "document_end",
+            "js": ["js/common_end.js"]
         },{
             "matches": ["https://test.authorize.net/*"],
             "run_at": "document_end",
