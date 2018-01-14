@@ -6,7 +6,26 @@
 
     let clickFunction = {
         'A' : ()=>{
-
+            let signUpForm = document.forms.signUpForm;
+            signUpForm.UserProfileFirstName.value = 'gzp_';
+            signUpForm.UserProfileLastName.value = commom.getRandomMathByTime();
+            signUpForm.UserEmail.value = signUpForm.UserProfileFirstName.value + signUpForm.UserProfileLastName.value + '@twobrightlights.com';
+            signUpForm.UserPassword.value = '123456789';
+            let UserAddressStateId = signUpForm.UserAddressStateId;
+            UserAddressStateId.value = 5;
+            document.getElementById('UserAddressStateIdSelectBoxItText').innerHTML = UserAddressStateId.options[UserAddressStateId.selectedIndex].text;
+            if( document.getElementById('hdn_sub_state_id') ){
+                document.getElementById('hdn_sub_state_id').value = 5;
+            }
+            signUpForm.UserAddressCity.value = 'New York';
+            signUpForm.UserAddressZipcode.value = '78234678';
+            signUpForm.UserAddressPhoneNumber.value = '2341234646';
+            signUpForm.UserProfileOrganizationName.value = signUpForm.UserProfileFirstName.value + signUpForm.UserProfileLastName.value;
+            let UserProfileEstablishedWhen = signUpForm.UserProfileEstablishedWhen;
+            UserProfileEstablishedWhen.value = 2018;
+            document.getElementById('UserProfileEstablishedWhenSelectBoxItText').innerHTML = UserProfileEstablishedWhen.options[UserProfileEstablishedWhen.selectedIndex].text;
+            signUpForm.UserProfileWebAddress.value = 'www.' +　signUpForm.UserProfileOrganizationName.value + '.com';
+            document.getElementById('chk_condition').click();
         },
         'B' : ()=>{
 
@@ -83,10 +102,12 @@
             day = date.getDate() ;
             return  ( month < 10 ? ( '0' + month ) : month ) + '/' + ( day < 10 ? ( '0' + day ) : day) + '/' + year ;
         },
-        'getRandomMathByBime' : ()=>{
-            let seconds = 1515922664 - Math.ceil((new Date()).valueOf() / 1000);
-            let currentDate = new Date();
-            year = currentDate.getFullYear() - 2018;
+        /**
+         * 返回距离当天早上10点的秒数
+         * @returns {number}
+         */
+        'getRandomMathByTime' : ()=>{
+            return Math.ceil((new Date()).valueOf() / 1000) - ((new Date()).setHours(10, 0, 0, 0)) /1000;
         }
     };
 
