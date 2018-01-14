@@ -16,6 +16,10 @@ let defineFunction = {
     'G' : {key:'G',value:'create Photographer data',page:'users/user_login'}
 };
 
+/**
+ * 用来存储创建的菜单 防止重复创建
+ * @type {{}}
+ */
 let menusArr = {
 
 };
@@ -28,7 +32,6 @@ let menusArr = {
  * @param tab
  */
 function translate(info, tab){
-    console.log(info, tab);
     chrome.contextMenus.remove('cn');
     let url = 'http://translate.google.com.hk/#auto/zh-CN/'+info.selectionText ;
     window.open(url, '_blank');
