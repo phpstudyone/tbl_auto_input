@@ -12,7 +12,7 @@ let defineFunction = {
     'B' : {key:'B',value:'create Vendor data',page:'signup/index',description:'signup/index page Vendor form'},
     'C' : {key:'C',value:'create Videographer data',page:'signup/index',description:'signup/index page Videographer form'},
     'D' : {key:'D',value:'create Editor data',page:'signup/index',description:'signup/index page  Editor form'},
-    'F' : {key:'F',value:'create Photographer data',page:'signup/index',description:'signup/index page Photographer'},
+    'E' : {key:'E',value:'create a album',page:'albums/create_album',description:'auto create a album in albums/create_album page'},
     'G' : {key:'G',value:'create Photographer data',page:'users/user_login'}
 };
 
@@ -88,6 +88,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
             createMenu(defineFunction.B);
             createMenu(defineFunction.C);
             createMenu(defineFunction.D);
+        }else if(/albums\/create_album/.test(url.pathname)){
+            createMenu(defineFunction.E);
         }
     }
 });
