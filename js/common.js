@@ -27,10 +27,7 @@ let pageFunction = {
         loginForm.UserEmail.value = 'gzp2@twobrightlights.com';
         loginForm.UserPassword.value = superPassword;
     },
-    'administrator':()=>{
-        document.getElementById('UserEmail').value = adminInfo.username;
-        document.getElementById('UserLoginPassword').value = adminInfo.password;
-    },
+
     '/albums/create_album':()=>{
         document.getElementsByClassName('albumTypeSelect')[0].click();
         let i = 1 , sleep = 1000;

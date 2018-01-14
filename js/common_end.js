@@ -14,6 +14,11 @@ if(url.host === 'qa-www.twobrightlights.com'){
     superPassword = '123456789';
 }
 
+if(/\/administrator.*/.test(url.pathname) && document.getElementById('UserLoginPassword')){
+    document.getElementById('UserEmail').value = adminInfo.username;
+    document.getElementById('UserLoginPassword').value = adminInfo.password;
+}
+
 //当顶部登录窗口处于打开状态,点击扩展图标自动填充
 let topLoginButton = document.getElementsByClassName('dropdown-toggle blueHighlight');
 if(topLoginButton.length === 1){
