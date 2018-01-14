@@ -1,6 +1,7 @@
-//接受消息
-// chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
-// });
+/**
+ * 页面加载完毕之前注入的js文件
+ * （供后台脚本调用）
+ */
 
 let commom = {
     'getAfterNdate' : (n)=>{
@@ -15,17 +16,7 @@ let commom = {
 };
 
 let url = new URL(window.location.href);
-superPassword = '';
-adminInfo = {
-    username:'tblgenadmin@twobrightlights.com',
-    password:'dkI_ef3Hd'
-};
 
-if(url.host === 'qa-www.twobrightlights.com'){
-    superPassword = 'aT2thg_Git8'; 
-}else if(url.host === 'local.tbl.com'){
-    superPassword = '123456789'; 
-}
 
 let pageFunction = {
     '/signup/index' : ()=>{
@@ -85,15 +76,6 @@ function run(){
 
     if(document.getElementById('cardNum')){
         document.getElementById('cardNum').value = '22222222';
-    }
-
-
-    //当顶部登录窗口处于打开状态,点击扩展图标自动填充
-    let topLoginForm = document.getElementsByClassName('dropdown blueHighlight  test-loginformbtn');
-    if(topLoginForm.length === 1 && topLoginForm[0].classList.contains('open')){
-        let frmLoginTop = document.forms.frmLoginTop;
-        frmLoginTop.UserEmail.value = 'gzp2@twobrightlights.com';
-        frmLoginTop.UserPassword.value = superPassword;
     }
 
     let preg = /\/administrator.*/;
