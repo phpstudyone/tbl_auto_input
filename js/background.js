@@ -24,18 +24,6 @@ let menusArr = {
 
 };
 
-/**
- * 跳转到翻译之后删除这个菜单（防止不停的新建相同菜单）
- * 希望后面能改进翻译（不跳转，在页面直接翻译）
- *（pop up 加载iframe 或者弹出modal框）
- * @param info
- * @param tab
- */
-function translate(info, tab){
-    chrome.contextMenus.remove('cn');
-    let url = 'http://translate.google.com.hk/#auto/zh-CN/'+info.selectionText ;
-    window.open(url, '_blank');
-}
 
 let createMenu = (defineKey)=>{
         createNormalMenus(defineKey.key,defineKey.value);
@@ -47,14 +35,11 @@ let createMenu = (defineKey)=>{
  * @param tab
  */
 let clickMenu = (info, tab)=>{
-    console.log(info, tab);
-    // chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-        chrome.tabs.sendMessage(tab.id, info.menuItemId,function(){
-            chrome.contextMenus.remove(info.menuItemId,function(){
-                menusArr[info.menuItemId] = 'undefined';
-            });
+    chrome.tabs.sendMessage(tab.id, info.menuItemId,function(){
+        chrome.contextMenus.remove(info.menuItemId,function(){
+            menusArr[info.menuItemId] = 'undefined';
         });
-    // });
+    });
 };
 
 let createNormalMenus = (id,title)=>{
@@ -76,15 +61,11 @@ let createNormalMenus = (id,title)=>{
  * 后台程序监控前台消息
  */
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
-    if(message.type === "translate"){
-        chrome.contextMenus.create({
-            'type':'normal',
-            'title':'使用Google翻译“'+message.text+'”',
-            'contexts':['selection'],
-            'id':'cn',
-            'onclick':translate
-        });
-    }else if(message.type === "auto_input"){
+    Object.keys(menusArr).forEach((value)=>{
+        menusArr[value] = undefined;
+        chrome.contextMenus.remove(value); 
+    });
+    if(message.type === "auto_input"){
         let url = new URL(message.text);
         if(/\/signup\/index/.test(url.pathname)){
             createMenu(defineFunction.A);

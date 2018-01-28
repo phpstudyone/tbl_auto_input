@@ -113,7 +113,7 @@
     window.onmouseup = function(){
         let selection = window.getSelection();
         if(selection.anchorOffset !== selection.extentOffset){
-            chrome.runtime.sendMessage({type:"translate","text":selection.toString()});
+            // chrome.runtime.sendMessage({type:"translate","text":selection.toString()});
         }else{
             chrome.runtime.sendMessage({type:"auto_input",'text':window.location.href});
         }
