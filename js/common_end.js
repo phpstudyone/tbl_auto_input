@@ -110,16 +110,16 @@
         }
     };
 
-    window.onmouseup = function(){
-        let selection = window.getSelection();
-        if(selection.anchorOffset !== selection.extentOffset){
-            // chrome.runtime.sendMessage({type:"translate","text":selection.toString()});
-        }else{
-            chrome.runtime.sendMessage({type:"auto_input",'text':window.location.href});
-        }
-    };
+    /**
+     * 页面加载完毕向后台发送消息
+     */
+    window.onload = function(){
+        chrome.runtime.sendMessage({type:"auto_input",'text':window.location.href});
+    }
 
-
+    /**
+     * 监听后台发送的消息
+     */
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         clickFunction[message]();
     });
