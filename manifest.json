@@ -10,6 +10,7 @@
         "*://qa-www.twobrightlights.com/*", 
         "*://local.tbl.com/*",
         "https://test.authorize.net/*",
+        "storage",
         "tabs",
         "history",
         "contextMenus"
@@ -37,5 +38,6 @@
             "js": ["js/authorize_net.js"],
             "all_frames": true
         }
-    ]
+    ],
+    "options_page": "options.html"
 }
