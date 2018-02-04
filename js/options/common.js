@@ -1,9 +1,13 @@
 (()=>{
 
     chrome.storage.local.get(function(message){
-        if(message.local){
-            document.getElementsByName('webURL[0]').value = message.local.webUrl;
-        }
+        Object.keys(message).forEach((element)=>{
+            document.getElementsByName('webURL['+element+']')[0].value = message[element].webUrl;
+            document.getElementsByName('fusername['+element+']')[0].value = message[element].fusername;
+            document.getElementsByName('fpassword['+element+']')[0].value = message[element].fpassword; 
+            document.getElementsByName('busername['+element+']')[0].value = message[element].busername; 
+            document.getElementsByName('bpassword['+element+']')[0].value = message[element].bpassword;  
+        })
     });
 
 
