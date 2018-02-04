@@ -9,6 +9,8 @@
     "permissions": [
         "*://qa-www.twobrightlights.com/*", 
         "*://local.tbl.com/*",
+        "*://twobrightlights.com/*",
+        "*://www.twobrightlights.com/*",
         "https://test.authorize.net/*",
         "storage",
         "tabs",
@@ -29,7 +31,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["*://qa-www.twobrightlights.com/*","*://local.tbl.com/*"],
+            "matches": ["*://qa-www.twobrightlights.com/*","*://local.tbl.com/*","*://twobrightlights.com/*","*://www.twobrightlights.com/*"],
             "run_at": "document_end",
             "js": ["js/common_end.js"]
         },{

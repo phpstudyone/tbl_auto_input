@@ -154,46 +154,58 @@
     document.oncontextmenu = ()=>{
         event.returnValue = true;
     };
+    let userLogin = {};
+    let adminLogin = {};
 
-    let superPassword = '';
-    let adminInfo = {
-        username:'tblgenadmin@twobrightlights.com',
-        password:'dkI_ef3Hd'
+    let urlPreg = {
+        local:/local\.tbl\.com/,
+        qa:/qa\-www\.twobrightlights\.com/,
+        prod:/\/\/twobrightlights\.com/,
+        prod1:/\/\/www\.twobrightlights\.com/
     };
 
-    if(url.host === 'qa-www.twobrightlights.com'){
-        superPassword = 'aT2thg_Git8';
-    }else if(url.host === 'local.tbl.com'){
-        superPassword = '123456789';
-    }
 
-    /**
-     *admin login page 加载完毕自动填充登陆表单
-     */
-    if(/\/administrator.*/.test(url.pathname) && document.getElementById('UserLoginPassword')){
-        document.getElementById('UserEmail').value = adminInfo.username;
-        document.getElementById('UserLoginPassword').value = adminInfo.password;
-    }
-
-    /**
-     *users login page 加载完毕自动填充登陆表单
-     */
-    if(/users\/user_login/.test(url.pathname)){
-        let loginForm = document.forms.frmLogin;
-        loginForm.UserEmail.value = 'gzp2@twobrightlights.com';
-        loginForm.UserPassword.value = superPassword;
-    }
-
-    /***
-     * 唤出顶部登陆框自动填充
-     */
-    let topLoginButton = document.getElementsByClassName('dropdown-toggle blueHighlight');
-    if(topLoginButton.length === 1){
-        topLoginButton[0].onclick=function(){
-            let frmLoginTop = document.forms.frmLoginTop;
-            frmLoginTop.UserEmail.value = 'gzp2@twobrightlights.com';
-            frmLoginTop.UserPassword.value = superPassword;
-        };
-    }
+    chrome.storage.local.get(function(message){
+        Object.keys(message).forEach(element => {
+            if(urlPreg[message[element]['preg']].test(url.href)){
+                let setInfo = {
+                    fusername : message[element].fusername,
+                    fpassword : message[element].fpassword,
+                    busername : message[element].busername, 
+                    bpassword : message[element].bpassword,
+                };
+                ((setInfo)=>{
+                    /**
+                     *admin login page 加载完毕自动填充登陆表单
+                     */
+                    if(/\/administrator.*/.test(url.pathname) && document.getElementById('UserLoginPassword')){
+                        document.getElementById('UserEmail').value = setInfo.busername;
+                        document.getElementById('UserLoginPassword').value = setInfo.bpassword;
+                    }
+                
+                    /**
+                     *users login page 加载完毕自动填充登陆表单
+                     */
+                    if(/users\/user_login/.test(url.pathname)){
+                        let loginForm = document.forms.frmLogin;
+                        loginForm.UserEmail.value = setInfo.fusername;
+                        loginForm.UserPassword.value = setInfo.fpassword;
+                    }
+                
+                    /***
+                     * 唤出顶部登陆框自动填充
+                     */
+                    let topLoginButton = document.getElementsByClassName('dropdown-toggle blueHighlight');
+                    if(topLoginButton.length === 1){
+                        topLoginButton[0].onclick=function(){
+                            let frmLoginTop = document.forms.frmLoginTop;
+                            frmLoginTop.UserEmail.value = setInfo.fusername;
+                            frmLoginTop.UserPassword.value = setInfo.fpassword;
+                        };
+                    }
+                })(setInfo)
+            }
+        });
+    });
 })();
 

@@ -1,5 +1,12 @@
 (()=>{
-    let setInfo = {};
+
+    chrome.storage.local.get(function(message){
+        if(message.local){
+            document.getElementsByName('webURL[0]').value = message.local.webUrl;
+        }
+    });
+
+
     let submit = document.getElementById('submit');
     submit.addEventListener('click',()=>{
         Array.from(document.getElementsByClassName('inputDiv')).forEach(value=>{
@@ -8,50 +15,34 @@
         });
     });
 
-    let checkUrl = (node,callback) =>{
-        let url = getUrlByNode(node);
-        if(/local\.tbl\.com/.test(url) || /qa\-www\.twobrightlights\.com/.test(url) || /\/\/twobrightlights.com/.test(url)){
-            callback(node);
-        }
+    let urlPreg = {
+        local:/local\.tbl\.com/,
+        qa:/qa\-www\.twobrightlights\.com/,
+        prod:/\/\/twobrightlights\.com/,
+        prod1:/\/\/www\.twobrightlights\.com/
     }
 
-    let saveInputData = (node)=>{
-        let permissionsUrl;
-        switch(node){
-            case 0: setInfo.node.permissionsUrl = "*://local.tbl.com/*"; break;
-            case 1: setInfo.node.permissionsUrl = "*://qa-www.twobrightlights.com/*"; break;
-            case 2: setInfo.node.permissionsUrl = "*://.twobrightlights.com/*"; break;
-        }
-        setInfo.node.fUserName = document.getElementsByName('fusername['+node+']')[0].value;
-        setInfo.node.fUserName = document.getElementsByName('fpassword['+node+']')[0].value;
-        setInfo.node.fUserName = document.getElementsByName('busername['+node+']')[0].value;
-        setInfo.node.fUserName = document.getElementsByName('bpassword['+node+']')[0].value;
-        chrome.storage.local.set(setInfo.node);
-
-        //获取数据
-        chrome.storage.local.get('a',function(message){
-            console.log(message)
+    let checkUrl = (node,callback) =>{
+        let url = getUrlByNode(node);
+        Object.keys(urlPreg).forEach((key)=>{
+            if(urlPreg[key].test(url)){
+                callback(node,key)
+            }
         });
-        
+    }
+
+    let saveInputData = (node,key)=>{
+        let setInfo = {};
+        setInfo.fusername = document.getElementsByName('fusername['+node+']')[0].value;
+        setInfo.fpassword = document.getElementsByName('fpassword['+node+']')[0].value;
+        setInfo.busername = document.getElementsByName('busername['+node+']')[0].value;
+        setInfo.bpassword = document.getElementsByName('bpassword['+node+']')[0].value;
+        setInfo.webUrl = getUrlByNode(node);
+        setInfo.preg = key;
+        chrome.storage.local.set({[node]:setInfo})
     }
 
     let getUrlByNode = (node)=>{
         return document.getElementsByName('webURL['+node+']')[0].value;
     }
-
-
-    let inputDiv = document.getElementById('add');
-    inputDiv.addEventListener("click", ()=>{
-        
-    });
-    
-    let createNode = ()=>{
-        let node = document.createElement('div');
-        node.className = 'tooltipBox';
-        node.createElement();
-    }
-
-
-
-
 })()
