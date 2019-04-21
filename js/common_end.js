@@ -120,9 +120,19 @@
     /**
      * 监听后台发送的消息
      */
-    chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-        clickFunction[message]();
+    chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+        console.log(message,1111);
+        // clickFunction[message]();
     });
+
+
+    chrome.extension.onMessage.addListener(
+        function(request, sender, sendResponse){
+            console.log(request);
+        }
+    );
+
+    
 
     let commom = {
         /**

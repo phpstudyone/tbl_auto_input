@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "TBL表单自动完成",
-    "version": "1.0.1",
+    "name": "tbl_auto_input",
+    "version": "2.0.0",
     "description": "自动补充TBL网站各种表单数据，方便测试",
     "icons": {
         "38": "images/icon38.png"
@@ -22,7 +22,7 @@
             "38": "images/icon38.png"
         },
         "default_title": "TBL表单自动完成",
-        "default_popup": "popup.html"
+        "default_popup": "popup/index.html"
     },
     "background":{
         "scripts": [

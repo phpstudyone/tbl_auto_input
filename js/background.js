@@ -56,6 +56,22 @@ let createNormalMenus = (id,title)=>{
     }
 };
 
+// localStorage.setItem('chore',JSON.stringify({
+//     action: 'photographyLogin',
+//     setup: 'A'
+// }));
+
+/**
+ * 后台向前台页面发送消息: 发送 localStorage 值
+ */
+// chrome.tabs.sendMessage();
+
+chrome.tabs.getSelected(null, (tab) => {
+    console.log(tab);
+    // chrome.tabs.sendMessage(tab.id, {greeting: "hello"}, function(response) {
+    //     console.log(response);
+    // });
+});
 
 /**
  * 后台程序监控前台消息
